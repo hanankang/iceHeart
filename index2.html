@@ -1,0 +1,108 @@
+﻿<html>
+<head>
+<title>永别</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+<style type="text/css">
+@import url(https://fonts.googleapis.com/css?family=Nunito:400,700,300);
+body {
+  font-family: 'Nunito', sans-serif;
+  background: #373e46;
+}
+.buttonContainer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+  cursor: pointer;
+}
+#Hotnews{
+  color: #e91d62;
+}
+</style>
+</head>
+<body>
+<div class="buttonContainer">
+<a id = "Hotnews" href="" target="_blank"> </a>  
+</div>
+<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://apps.bdimg.com/libs/layer/2.1/layer.js"></script>
+<script language="javascript">
+  var NewsTime = 1000;    //每条信息完整出现后停留时间
+  var TextTime = 200;    //每条信息中的字出现的间隔时间
+  
+  var newsi = 0;
+  var txti = 0;
+  var txttimer;   //调用setInterval的返回值，用于取消对函数的周期性执行
+  var newstimer;
+  
+  var newstitle = new Array();    //以数组形式保存每个信息的标题
+  var newshref = new Array();   //以数组形式保存信息标题的链接
+  
+  newstitle[0] = "青山不改";   //显示在网页上的文字内容和对应的链接
+  newshref[0] = "index3.html";
+  
+  newstitle[1] = "绿水长流";
+  newshref[1] = "index3.html";
+  
+  newstitle[2] = "我们";
+  newshref[2] = "index3.html";
+  
+  newstitle[3] = "后会无期~~";
+  newshref[3] = "index3.html";
+  
+  function shownew(){
+    hwnewstr=newstitle[newsi];    //通过newsi传递，依次显示数组中的内容
+    newslink=newshref[newsi];     //依次显示文字对应的链接
+     
+    if(txti>=hwnewstr.length){
+      clearInterval(txttimer);  //一旦超过要显示的文字长度，清除对shownew()的周期性调用
+      clearInterval(newstimer); 
+      newsi++;   //显示数组中的下一个
+      
+      if(newsi>=newstitle.length){
+        newsi = 0;  //当newsi大于信息标题的数量时，把newsi清零，重新从第一个显示
+      }
+      newstimer = setInterval("shownew()",NewsTime);   //间隔2000ms后重新调用shownew()
+      txti = 0;  
+      return;
+    }
+    clearInterval(txttimer);  
+    document.getElementById("Hotnews").href = newslink;  
+    document.getElementById("Hotnews").innerHTML = hwnewstr.substring(0,txti+1);   //截取字符，从第一个字符到txti+1个字符
+    
+    txti++;  //文字一个个出现
+    txttimer = setInterval("shownew()",TextTime);   
+  }
+  shownew();
+  	setTimeout(function() {
+		document.getElementById("Hotnews").style.display="none";
+		aa();
+			//location="http://wpa.qq.com/msgrd?v=3&uin=2116074119&site=qq&menu=yes"		
+			}, 6600);	
+function aa(){
+layer.confirm('妹子,加个好友啊？', {
+  btn: ['添加', '拒绝无效'] //可以无限个按钮
+  ,
+}, function(index, layero){
+layer.alert('酷毙了', {icon: 1});
+ window.location="index3.html"
+}, function(index){
+  bb();
+});
+}
+function bb(){
+layer.confirm('你再想想？', {
+  btn: ['想好了', '我笨'] //可以无限个按钮
+  ,
+}, function(index, layero){
+layer.alert('酷毙了', {icon: 1});
+}, function(index){
+  bb();
+});
+}
+</script>
+</body>
+</html>
